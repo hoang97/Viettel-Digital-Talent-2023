@@ -35,7 +35,11 @@ jobs:
       - name: Build api server
         run: docker build -t api  ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api
       - name: Run api server
-        run: docker run -p 8080:8080 -d api
+        run: |
+            docker run -p 8080:8080 -d \
+            -e MONGODB_DATABASE=${{ github.env.MONGODB_DATABASE }} \
+            -e MONGODB_HOSTNAME=${{ github.env.MONGODB_HOSTNAME }} \
+            api
 
       - name: Run tests
         run: pytest ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api/tests/test_api.py

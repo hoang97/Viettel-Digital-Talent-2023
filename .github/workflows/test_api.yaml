@@ -28,22 +28,22 @@ jobs:
       - name: Run mock database
         run: docker run -p 27017:27017 --network test_net --name db -d db 
 
+      - name: Build api server
+        run: docker build -t api ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api
+      - name: Run api server
+        run: |
+            docker run -p 8080:8080 --network test_net --name api -d \
+            -e MONGODB_DATABASE=flaskdb \
+            -e MONGODB_HOSTNAME=db \
+            api
+
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install denpendencies
         run: pip install -r ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api/tests/requirements.txt
-
-      - name: Build api server
-        run: docker build -t api  ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api
-      - name: Run api server
-        run: |
-            docker run -p 8080:8080 --network test_net --name api -d \
-            -e MONGODB_DATABASE=$MONGODB_DATABASE \
-            -e MONGODB_HOSTNAME=$MONGODB_HOSTNAME \
-            api
-
+    
       - name: Run tests
         run: pytest ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api/tests/test_api.py
             

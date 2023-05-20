@@ -16,7 +16,7 @@ jobs:
 
     env:
       MONGODB_DATABASE: flaskdb
-      MONGODB_HOSTNAME: localhost
+      MONGODB_HOSTNAME: db
     steps:
       - uses: actions/checkout@v2
 
@@ -40,8 +40,8 @@ jobs:
       - name: Run api server
         run: |
             docker run -p 8080:8080 --network test_net --name api -d \
-            -e MONGODB_DATABASE=${{ github.env.MONGODB_DATABASE }} \
-            -e MONGODB_HOSTNAME=${{ github.env.MONGODB_HOSTNAME }} \
+            -e MONGODB_DATABASE=$MONGODB_DATABASE \
+            -e MONGODB_HOSTNAME=$MONGODB_HOSTNAME \
             api
 
       - name: Run tests

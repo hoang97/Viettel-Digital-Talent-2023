@@ -20,9 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build mock database
-        run: docker build -t db source/db -p 27017:27017
+        run: docker build -t db source/db
       - name: Run mock database
-        run: docker run db
+        run: docker run -p 27017:27017 db 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:

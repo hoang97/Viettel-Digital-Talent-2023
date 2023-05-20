@@ -3,12 +3,22 @@ on:
   push:
     branches: [midterm] 
 jobs:
-  test_flow:
+  changes:
     runs-on: ubuntu-latest
+    permissions: read-all
+    outputs:
+      dobaohoang: ${{ steps.filter.outputs.dobaohoang }}
     steps:
-      - run: echo Hello World
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            dobaohoang:
+              - '10. GK/DoBaoHoang/**'
 
   test_api:
+    needs: changes
+    if: ${{ needs.changes.outputs.dobaohoang == 'true' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -18,7 +28,7 @@ jobs:
       MONGODB_DATABASE: flaskdb
       MONGODB_HOSTNAME: db
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Create network
         run: docker network create --driver bridge test_net

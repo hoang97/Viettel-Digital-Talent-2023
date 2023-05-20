@@ -9,7 +9,7 @@ jobs:
       - run: echo Hello World
 
   test_api:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.10", "3.11"]

@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build mock database
-        run: docker build -t db source/db
+        run: docker build -t db ${{ github.workspace }}/source/db
       - name: Run mock database
         run: docker run -p 27017:27017 db 
       - name: Setup Python ${{ matrix.python-version }}

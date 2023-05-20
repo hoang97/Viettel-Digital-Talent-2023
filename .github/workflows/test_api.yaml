@@ -6,15 +6,17 @@ jobs:
   changes:
     runs-on: ubuntu-latest
     permissions: read-all
-    outputs:
-      dobaohoang: ${{ steps.filter.outputs.dobaohoang }}
+
     steps:
+      - uses: actions/checkout@v3
       - uses: dorny/paths-filter@v2
         id: filter
         with:
           filters: |
             dobaohoang:
-              - '10. GK/DoBaoHoang/**'
+              - ${{ github.workspace }}/"10. GK"/DoBaoHoang/**
+    outputs:
+      dobaohoang: ${{ steps.filter.outputs.dobaohoang }}
 
   test_api:
     needs: changes

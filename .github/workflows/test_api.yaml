@@ -20,10 +20,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Create network
+        run: docker network create --driver bridge test_net
+
       - name: Build mock database
         run: docker build -t db ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/db
       - name: Run mock database
-        run: docker run -p 27017:27017 -d db 
+        run: docker run -p 27017:27017 --network test_net --name db -d db 
 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
@@ -36,7 +39,7 @@ jobs:
         run: docker build -t api  ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api
       - name: Run api server
         run: |
-            docker run -p 80:8080 -d \
+            docker run -p 80:8080 --network test_net --name api -d \
             -e MONGODB_DATABASE=${{ github.env.MONGODB_DATABASE }} \
             -e MONGODB_HOSTNAME=${{ github.env.MONGODB_HOSTNAME }} \
             api

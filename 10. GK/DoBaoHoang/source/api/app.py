@@ -7,8 +7,6 @@ application = Flask(__name__)
 
 MONGODB_DATABASE = os.environ.get("MONGODB_DATABASE")
 MONGODB_HOSTNAME = os.environ.get("MONGODB_HOSTNAME")
-# MONGODB_DATABASE = "flaskdb"
-# MONGODB_HOSTNAME = "localhost"
 
 client = MongoClient(f"{MONGODB_HOSTNAME}:27017")
 db = client[MONGODB_DATABASE]

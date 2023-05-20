@@ -11,10 +11,8 @@ if __name__ == "__main__":
     import os
     from pymongo import MongoClient
 
-    # MONGODB_DATABASE = os.environ.get("MONGODB_DATABASE")
-    # MONGODB_HOSTNAME = os.environ.get("MONGODB_HOSTNAME")
-    MONGODB_DATABASE = "flaskdb"
-    MONGODB_HOSTNAME = "localhost"
+    MONGODB_DATABASE = os.environ.get("MONGODB_DATABASE")
+    MONGODB_HOSTNAME = os.environ.get("MONGODB_HOSTNAME")
 
     client = MongoClient(f"{MONGODB_HOSTNAME}:27017")
     db = client[MONGODB_DATABASE]

@@ -22,7 +22,7 @@ jobs:
       - name: Build mock database
         run: docker build -t db ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/db
       - name: Run mock database
-        run: docker run -p 27017:27017 db 
+        run: docker run -p 27017:27017 -d db 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:

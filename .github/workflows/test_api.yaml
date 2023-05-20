@@ -20,16 +20,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build mock database
-        run: docker build -t db ${{ github.workspace }}/source/db
+        run: docker build -t db ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/db
       - name: Run mock database
         run: docker run -p 27017:27017 db 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install Pytest
-        run: python -m pip install pytest
+      - name: Install denpendencies
+        run: pip install -r ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api/tests/requirements.txt
       - name: Run tests
-        run: pytest
+        run: pytest ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api/tests/test_api.py
             
             

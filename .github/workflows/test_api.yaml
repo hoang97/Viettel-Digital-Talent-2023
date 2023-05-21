@@ -12,9 +12,10 @@ jobs:
       - uses: dorny/paths-filter@v2
         id: filter
         with:
+          base: 'midterm'
           filters: |
             dobaohoang:
-              - ${{ github.workspace }}/"10. GK"/DoBaoHoang/**
+              - "10. GK"/DoBaoHoang/**
     outputs:
       dobaohoang: ${{ steps.filter.outputs.dobaohoang }}
 

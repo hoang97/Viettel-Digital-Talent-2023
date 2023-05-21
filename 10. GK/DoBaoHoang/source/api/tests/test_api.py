@@ -5,9 +5,8 @@ from bson import ObjectId
 
 base_url = 'http://localhost:8080'
 MONGODB_DATABASE = "flaskdb"
-MONGODB_HOSTNAME = "localhost"
 
-client = MongoClient(f"{MONGODB_HOSTNAME}:27017")
+client = MongoClient(f"localhost:27017")
 db = client[MONGODB_DATABASE]
 collection = db.attendees
 

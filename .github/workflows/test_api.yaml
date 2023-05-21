@@ -15,7 +15,7 @@ jobs:
           base: 'midterm'
           filters: |
             dobaohoang:
-              - "10. GK"/DoBaoHoang/**
+              - 10. GK/DoBaoHoang/**
     outputs:
       dobaohoang: ${{ steps.filter.outputs.dobaohoang }}
 

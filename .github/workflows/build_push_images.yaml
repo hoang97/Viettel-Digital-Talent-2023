@@ -29,6 +29,7 @@ jobs:
                        -t ${{ secrets.DOCKERHUB_USERNAME }}/api:latest \
                         ./'10. GK'/DoBaoHoang/source/api
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/api:${{ steps.vars.outputs.tag }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/api:latest
 
       - name: Build and push Web server image
         run: |
@@ -36,6 +37,7 @@ jobs:
                        -t ${{ secrets.DOCKERHUB_USERNAME }}/web:latest \
                        ./'10. GK'/DoBaoHoang/source/server
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/web:${{ steps.vars.outputs.tag }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/latest
 
       - name: Build and push Database image
         run: |
@@ -43,3 +45,4 @@ jobs:
                        -t ${{ secrets.DOCKERHUB_USERNAME }}/db:latest \
                        ./'10. GK'/DoBaoHoang/source/db
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/db:${{ steps.vars.outputs.tag }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/db:latest

@@ -2,7 +2,8 @@ name: Build and Push Images to Dockerhub
 
 on:
   push:
-    tags: ["*"]
+    tags:
+      - "**"
 
 jobs:
   release:
@@ -10,4 +11,3 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-      

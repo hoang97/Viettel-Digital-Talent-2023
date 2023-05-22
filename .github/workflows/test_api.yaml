@@ -4,12 +4,11 @@ on:
     branches: ["*"]
     paths:
       - "DoBaoHoang/source/api/**"
-      - ".github/workflow/test_api.yaml"
+
   pull_request:
     branches: [main]
     paths:
       - "DoBaoHoang/source/api/**"
-      - ".github/workflow/test_api.yaml"
 
 jobs:
   test_api:

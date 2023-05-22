@@ -26,20 +26,20 @@ jobs:
       - name: Build and push API image
         uses: docker/build-push-action@v4
         with:
-          context: "{{ defaultContext }}:'10. GK'/DoBaoHoang/source/api/"
+          context: ./'10. GK'/DoBaoHoang/source/api/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/api:${{ steps.vars.outputs.tag }}
 
       - name: Build and push Web server image
         uses: docker/build-push-action@v4
         with:
-          context: "{{ defaultContext }}:'10. GK'/DoBaoHoang/source/server/"
+          context: ./'10. GK'/DoBaoHoang/source/server/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/web:${{ steps.vars.outputs.tag }}
 
       - name: Build and push DB image
         uses: docker/build-push-action@v4
         with:
-          context: "{{ defaultContext }}:'10. GK'/DoBaoHoang/source/db/"
+          context: ./'10. GK'/DoBaoHoang/source/db/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/db:${{ steps.vars.outputs.tag }}

@@ -25,15 +25,21 @@ jobs:
 
       - name: Build and push API image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/api:${{ steps.vars.outputs.tag }} ./'10. GK'/DoBaoHoang/source/api
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/api:${{ steps.vars.outputs.tag }} \
+                       -t ${{ secrets.DOCKERHUB_USERNAME }}/api:latest \
+                        ./'10. GK'/DoBaoHoang/source/api
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/api:${{ steps.vars.outputs.tag }}
 
       - name: Build and push Web server image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/web:${{ steps.vars.outputs.tag }} ./'10. GK'/DoBaoHoang/source/server
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/web:${{ steps.vars.outputs.tag }} \
+                       -t ${{ secrets.DOCKERHUB_USERNAME }}/web:latest \
+                       ./'10. GK'/DoBaoHoang/source/server
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/web:${{ steps.vars.outputs.tag }}
 
       - name: Build and push Database image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/db:${{ steps.vars.outputs.tag }} ./'10. GK'/DoBaoHoang/source/db
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/db:${{ steps.vars.outputs.tag }} \
+                       -t ${{ secrets.DOCKERHUB_USERNAME }}/db:latest \
+                       ./'10. GK'/DoBaoHoang/source/db
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/db:${{ steps.vars.outputs.tag }}

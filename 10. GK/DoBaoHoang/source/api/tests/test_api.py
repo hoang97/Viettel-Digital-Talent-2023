@@ -11,7 +11,7 @@ db = client[MONGODB_DATABASE]
 collection = db.attendees
 
 def is_in(user, user_list):
-    # nếu có user thì user phải nằm trong list
+    # nếu có user thì user phải có trong list
     for u in user_list:
         if user.get('name') == u.get('name'):
             return True

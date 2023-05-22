@@ -1,7 +1,8 @@
 name: unittest_api
 on:
   push:
-    branches: ["*"]
+    branches:
+      - "*"
     paths:
       - "DoBaoHoang/source/api/**"
 

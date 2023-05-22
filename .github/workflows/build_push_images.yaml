@@ -37,7 +37,7 @@ jobs:
                        -t ${{ secrets.DOCKERHUB_USERNAME }}/web:latest \
                        ./'10. GK'/DoBaoHoang/source/server
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/web:${{ steps.vars.outputs.tag }}
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/web:latest
 
       - name: Build and push Database image
         run: |

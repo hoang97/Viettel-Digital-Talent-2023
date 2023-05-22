@@ -1,5 +1,6 @@
 let tableBody = document.getElementById("attendees");
 let tableHead = document.getElementById("headTable");
+let titleHead = document.getElementById("headTitle");
 const baseURL = '';
 
 // Initiate Table
@@ -21,6 +22,7 @@ fetch(baseURL + '/profiles')
     .then(resp => resp.json())
     .then(data => {
         data.attendees.forEach(attendee => {
+            titleHead.textContent = `IP: ${data.ip}`;
             let row = document.createElement("tr");
             appendCellData(row, attendee.name);
             appendCellData(row, attendee.birth_year);

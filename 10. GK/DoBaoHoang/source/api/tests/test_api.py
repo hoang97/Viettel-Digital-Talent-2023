@@ -11,11 +11,6 @@ db = client[MONGODB_DATABASE]
 collection = db.attendees
 
 def is_in(user, user_list):
-
-    # nếu database ko có user nào thì phải trả ra list rỗng
-    if not user:
-        return not user_list
-    
     # nếu có user thì user phải nằm trong list
     for u in user_list:
         if user.get('name') == u.get('name'):
@@ -29,8 +24,14 @@ def test_list_api():
     assert response.status_code == 200
 
     attendees = collection.find({})
+    user_list = response.json().get('attendees')
+
+    # nếu database ko có user nào thì phải trả ra list rỗng
+    if attendees.count() == 0:
+        assert not user_list
+
     for attendee in attendees:
-        assert is_in(attendee, response.json().get('attendees'))
+        assert is_in(attendee, user_list)
 
 def test_read_api():
     name = random.randint(0, 9999)

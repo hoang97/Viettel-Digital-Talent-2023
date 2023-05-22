@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Checkout source code
+        uses: actions/checkout@v3
 
       - name: Extract version
         id: vars
@@ -24,22 +24,16 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push API image
-        uses: docker/build-push-action@v4
-        with:
-          context: ./'10. GK'/DoBaoHoang/source/api
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/api:${{ steps.vars.outputs.tag }}
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/api:${{ steps.vars.outputs.tag }} ./'10. GK'/DoBaoHoang/source/api
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/api:${{ steps.vars.outputs.tag }}
 
       - name: Build and push Web server image
-        uses: docker/build-push-action@v4
-        with:
-          context: ./'10. GK'/DoBaoHoang/source/server
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/web:${{ steps.vars.outputs.tag }}
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/web:${{ steps.vars.outputs.tag }} ./'10. GK'/DoBaoHoang/source/server
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/web:${{ steps.vars.outputs.tag }}
 
-      - name: Build and push DB image
-        uses: docker/build-push-action@v4
-        with:
-          context: ./'10. GK'/DoBaoHoang/source/db
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/db:${{ steps.vars.outputs.tag }}
+      - name: Build and push Database image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/db:${{ steps.vars.outputs.tag }} ./'10. GK'/DoBaoHoang/source/db
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/db:${{ steps.vars.outputs.tag }}

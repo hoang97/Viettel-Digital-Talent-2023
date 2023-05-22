@@ -1,43 +1,59 @@
-name: unittest_api
+name: test_api
 on:
   push:
-    branches:
-      - "*"
-    paths:
-      - "DoBaoHoang/source/api/**"
-
+    branches: ["*"] 
   pull_request:
-    branches: [main]
-    paths:
-      - "DoBaoHoang/source/api/**"
+    branches: ["main"]
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    permissions: read-all
+    outputs:
+      dobaohoang: ${{ steps.filter.outputs.dobaohoang }}
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            dobaohoang:
+              - '10. GK/DoBaoHoang/**'
+
   test_api:
-    name: UnitTest API
+    needs: changes
+    if: ${{ needs.changes.outputs.dobaohoang == 'true' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.10", "3.11"]
 
+    env:
+      MONGODB_DATABASE: flaskdb
+      MONGODB_HOSTNAME: db
     steps:
       - uses: actions/checkout@v3
 
-      - name: Build and Run mock environment
+      - name: Create network
+        run: docker network create --driver bridge test_net
+
+      - name: Build mock database
+        run: docker build -t db ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/db
+      - name: Run mock database
+        run: docker run -p 27017:27017 --network test_net --name db -d db 
+
+      - name: Build api server
+        run: docker build -t api ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api
+      - name: Run api server
         run: |
-          docker network create test_net
-          docker build -t db ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/db 
-          docker run -p 27017:27017 --name db --network test_net -d db 
-          docker build -t api ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api
-          docker run -p 8080:8080 --name api -d \
+            docker run -p 8080:8080 --network test_net --name api -d \
             -e MONGODB_DATABASE=flaskdb \
             -e MONGODB_HOSTNAME=db \
-            api 
+            api
 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-          
       - name: Install denpendencies
         run: pip install -r ${{ github.workspace }}/"10. GK"/DoBaoHoang/source/api/tests/requirements.txt
     

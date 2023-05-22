@@ -12,9 +12,11 @@ jobs:
     outputs:
       dobaohoang: ${{ steps.filter.outputs.dobaohoang }}
     steps:
+      - uses: actions/checkout@v3
       - uses: dorny/paths-filter@v2
         id: filter
         with:
+          base: ${{ github.ref }}
           filters: |
             dobaohoang:
               - '10. GK/DoBaoHoang/**'

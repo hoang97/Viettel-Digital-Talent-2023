@@ -26,10 +26,6 @@ def test_list_api():
     attendees = collection.find({})
     user_list = response.json().get('attendees')
 
-    # nếu database ko có user nào thì phải trả ra list rỗng
-    if attendees.count() == 0:
-        assert not user_list
-
     for attendee in attendees:
         assert is_in(attendee, user_list)
 

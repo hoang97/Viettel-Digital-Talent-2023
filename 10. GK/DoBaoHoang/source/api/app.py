@@ -32,7 +32,7 @@ def profiles():
         attendee['_id'] = str(attendee['_id'])
         attendees.append(attendee)
     response = {
-        "ip": socket.gethostbyaddr(socket.gethostname()),
+        "ip": socket.gethostbyname(socket.gethostname()),
         "attendees": attendees
     }
     return response, 200

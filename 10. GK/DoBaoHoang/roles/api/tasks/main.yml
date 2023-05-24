@@ -27,5 +27,9 @@
         - 8080
       published_ports:
         - "8080:8080"
+      log_driver: fluentd
+      log_options:
+        fluentd-address: "localhost:24224"
+        fluentd-async-connect: "true"
       restart_policy: unless-stopped
       state: started

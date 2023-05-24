@@ -54,3 +54,12 @@ jobs:
                        ./'10. GK'/DoBaoHoang/source/lb
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/lb:${{ steps.vars.outputs.tag }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/lb:latest
+      
+
+      - name: Build and push Logging image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/logging:${{ steps.vars.outputs.tag }} \
+                       -t ${{ secrets.DOCKERHUB_USERNAME }}/logging:latest \
+                       ./'10. GK'/DoBaoHoang/source/logging
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/logging:${{ steps.vars.outputs.tag }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/logging:latest

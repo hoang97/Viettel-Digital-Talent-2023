@@ -28,5 +28,9 @@
         - "27017:27017"
       volumes:
         - /mongodbdata:/data/db
+      log_driver: fluentd
+      log_options:
+        fluentd-address: "localhost:24224"
+        fluentd-async-connect: "true"
       restart_policy: unless-stopped
       state: started

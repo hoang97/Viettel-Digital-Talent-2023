@@ -1,7 +1,7 @@
 let tableBody = document.getElementById("attendees");
 let tableHead = document.getElementById("headTable");
 let titlePage = document.getElementById("pageTitle");
-const baseURL = '';
+const baseURL = '/api';
 
 // Initiate Table
 const cols = ["Họ và tên", "Năm sinh", "Giới tính", "Đại học", "Chuyên ngành", "Action"];

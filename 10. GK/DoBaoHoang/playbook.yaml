@@ -12,3 +12,8 @@
   hosts: server
   become: true
   roles: [ common, web ]
+
+- name: Setup load balaner
+  hosts: lb
+  become: true
+  roles: [ common, lb ]

@@ -1,24 +1,24 @@
-- name: Setup prometheus server
-  hosts: prometheus
+- name: Setup Prometheus and Fluentd server
+  hosts: datacenter
   become: true
-  roles: [ common, prometheus ]
+  roles: [ common, prometheus, logging ]
 
 - name: Setup database server
   hosts: db
   become: true
-  roles: [ common, db, monitor ]
+  roles: [ common, monitor, db ]
 
 - name: Setup api server
   hosts: api
   become: true
-  roles: [ common, api, monitor ]
+  roles: [ common, monitor, api ]
 
 - name: Setup web server
   hosts: server
   become: true
-  roles: [ common, web, monitor ]
+  roles: [ common, monitor, web ]
 
 - name: Setup load balaner
   hosts: lb
   become: true
-  roles: [ common, lb, monitor ]
+  roles: [ common, monitor, lb ]

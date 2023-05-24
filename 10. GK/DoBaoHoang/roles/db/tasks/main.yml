@@ -30,7 +30,7 @@
         - /mongodbdata:/data/db
       log_driver: fluentd
       log_options:
-        fluentd-address: "localhost:24224"
+        fluentd-address: "192.168.0.133:24224"
         fluentd-async-connect: "true"
       restart_policy: unless-stopped
       state: started

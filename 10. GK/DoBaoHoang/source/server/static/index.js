@@ -82,7 +82,7 @@ function appendCellAction(parent, attendee) {
 // Handle Forms
 
 function refreshPage() {
-    document.location.href = baseURL + '/';
+    document.location.href = '/';
 }
 
 // Handle form Create

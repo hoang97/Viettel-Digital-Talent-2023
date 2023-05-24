@@ -1,19 +1,24 @@
+- name: Setup prometheus server
+  hosts: prometheus
+  become: true
+  roles: [ common, prometheus ]
+
 - name: Setup database server
   hosts: db
   become: true
-  roles: [ common, db ]
+  roles: [ common, db, monitor ]
 
 - name: Setup api server
   hosts: api
   become: true
-  roles: [ common, api ]
+  roles: [ common, api, monitor ]
 
 - name: Setup web server
   hosts: server
   become: true
-  roles: [ common, web ]
+  roles: [ common, web, monitor ]
 
 - name: Setup load balaner
   hosts: lb
   become: true
-  roles: [ common, lb ]
+  roles: [ common, lb, monitor ]

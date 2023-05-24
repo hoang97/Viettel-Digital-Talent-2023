@@ -25,7 +25,7 @@ def is_valid(profile):
         return False
     return True
 
-@application.route("/profiles")
+@application.route("/api/profiles")
 def profiles():
     attendees = []
     for attendee in collection.find():
@@ -37,7 +37,7 @@ def profiles():
     }
     return response, 200
     
-@application.route("/profile/create", methods=["POST"])
+@application.route("/api/profile/create", methods=["POST"])
 def create_profile():
     profile = {
         'name': request.form.get('name', ''),
@@ -53,7 +53,7 @@ def create_profile():
 
     return "not a valid profile", 400
 
-@application.route("/profile/<id>", methods=["GET"])
+@application.route("/api/profile/<id>", methods=["GET"])
 def read_profile(id):
     try:
         attendee = collection.find_one({"_id": ObjectId(id)})
@@ -64,7 +64,7 @@ def read_profile(id):
     return attendee, 200
         
 
-@application.route("/profile/<id>", methods=["PUT"])
+@application.route("/api/profile/<id>", methods=["PUT"])
 def update_profile(id):
     updates = {
         'birth_year': request.form.get('birth_year', ''),
@@ -83,7 +83,7 @@ def update_profile(id):
         return str(result.modified_count), 200
 
 
-@application.route("/profile/<id>", methods=["DELETE"])
+@application.route("/api/profile/<id>", methods=["DELETE"])
 def delete_profile(id):
     try:
         collection.find_one({"_id": ObjectId(id)})

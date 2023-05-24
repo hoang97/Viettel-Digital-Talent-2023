@@ -1,6 +1,6 @@
 ---
-# tasks file for web
-- name: Install and run Web Server
+# tasks file for lb
+- name: Install and run Load Balancer
   block:
   - name: Pull Nginx image
     community.general.docker_image:
@@ -21,8 +21,8 @@
       name: "{{ nginx_container_name }}"
       image: "{{ nginx_image }}:{{ nginx_tag }}"
       exposed_ports:
-        - 1234
+        - 80
       published_ports:
-        - "1234:1234"
+        - "80:80"
       restart_policy: unless-stopped
       state: started

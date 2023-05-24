@@ -3,7 +3,7 @@ import random
 from pymongo import MongoClient
 from bson import ObjectId
 
-base_url = 'http://localhost:8080'
+base_url = 'http://localhost:8080/api'
 MONGODB_DATABASE = "flaskdb"
 
 client = MongoClient(f"localhost:27017")

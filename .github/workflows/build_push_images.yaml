@@ -46,3 +46,11 @@ jobs:
                        ./'10. GK'/DoBaoHoang/source/db
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/db:${{ steps.vars.outputs.tag }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
+
+      - name: Build and push Load Balancer image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/lb:${{ steps.vars.outputs.tag }} \
+                       -t ${{ secrets.DOCKERHUB_USERNAME }}/lb:latest \
+                       ./'10. GK'/DoBaoHoang/source/lb
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/lb:${{ steps.vars.outputs.tag }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/lb:latest

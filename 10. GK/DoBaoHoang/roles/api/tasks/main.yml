@@ -31,5 +31,6 @@
       log_options:
         fluentd-address: "192.168.0.133:24224"
         fluentd-async-connect: "true"
+        tag: "docker.api"
       restart_policy: unless-stopped
       state: started

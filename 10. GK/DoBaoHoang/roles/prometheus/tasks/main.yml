@@ -3,7 +3,7 @@
 - name: Copy prometheus config
   copy: 
     src: ./source/prometheus/prometheus.yml
-    dest: /tmp
+    dest: /tmp/prometheus.yml
   become: true
 
 - name: Run Prometheus container

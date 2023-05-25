@@ -1,5 +1,4 @@
 import os
-import socket
 from flask import Flask, request
 from pymongo import MongoClient
 from bson import ObjectId, errors
@@ -7,6 +6,7 @@ application = Flask(__name__)
 
 MONGODB_DATABASE = os.environ.get("MONGODB_DATABASE")
 MONGODB_HOSTNAME = os.environ.get("MONGODB_HOSTNAME")
+HOST_URL = os.environ.get("HOST_URL")
 
 client = MongoClient(f"{MONGODB_HOSTNAME}:27017")
 db = client[MONGODB_DATABASE]
@@ -32,7 +32,7 @@ def profiles():
         attendee['_id'] = str(attendee['_id'])
         attendees.append(attendee)
     response = {
-        "ip": socket.gethostbyname(socket.gethostname()),
+        "ip": HOST_URL,
         "attendees": attendees
     }
     return response, 200

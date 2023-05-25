@@ -23,6 +23,7 @@
       env:
         MONGODB_DATABASE: flaskdb
         MONGODB_HOSTNAME: "192.168.0.128"
+        HOST_URL: "{{ ansible_all_ipv4_addresses | select('search', '192.168.0.') | first }}"
       exposed_ports:
         - 8080
       published_ports:
